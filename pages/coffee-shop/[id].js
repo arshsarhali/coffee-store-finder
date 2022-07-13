@@ -7,21 +7,22 @@ import { fetchCoffeeStores } from "../../lib/coffee-stores";
 
 import styles from '../../styles/coffeeStore.module.css'
 import Image from "next/image";
+import { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../../store/store.context";
+import { isEmpty } from "../../utils";
 
-export async function getStaticProps({params}){
-
+export async function getStaticProps({params}) {
+  
     const coffeeStores = await fetchCoffeeStores();
-
-    return{
-        props:{
-            coffeeStore:coffeeStores.find(
-                (coffeeStore)=>{
-                    return coffeeStore.id.toString()===params.id;
-                }
-            )
-        }
-    }
-}
+    const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
+      return coffeeStore.id.toString() === params.id;
+    });
+    return {
+      props: {
+        coffeeStore: findCoffeeStoreById ? findCoffeeStoreById : {},
+      },
+    };
+  }
 
 export async function getStaticPaths(){
     const coffeeStores = await fetchCoffeeStores();
@@ -39,15 +40,34 @@ export async function getStaticPaths(){
     }
 }
 
-const CoffeeStore =(props)=>{
+const CoffeeStore =(initialProps)=>{
    const router = useRouter();
    const {id} = router.query;
+   const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore)
 
    if (router.isFallback){
     return <div>Loading....</div>
    }
 
-   const {address,neighborhood,name,imgUrl}= props.coffeeStore
+   const {
+    state:{
+        coffeeStores
+    }
+   } = useContext(StoreContext)
+
+   useEffect(()=>{
+    if(isEmpty(initialProps.coffeeStore)){
+        if (!coffeeStore.length ){
+            const findCoffeeStoreById = coffeeStores.find(
+                (coffeeStore)=>{
+                    return coffeeStore.id.toString()===id;
+                })
+            setCoffeeStore(findCoffeeStoreById)
+        }
+    }
+   },[id])
+
+   const {address,neighborhood,name,imgUrl}= coffeeStore
 
    const handleUpVoteButton= ()=>{
     console.log("Upvoted")
