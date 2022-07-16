@@ -33,7 +33,7 @@ export default function Home(props) {
 
   const {coffeeStores, latLong} = state;
 
-  console.log({latLong,locationErrorMsg})
+
 
   useEffect(() =>{
     async function setCoffeeStoresByLocation(){
@@ -63,7 +63,6 @@ setCoffeeStoresByLocation();
 
 
   const handleOnBannerBtnClick=()=>{
-    console.log("Hi from Banner Button")
     handleUserLocation();
   }
   return (
