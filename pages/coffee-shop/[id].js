@@ -43,11 +43,8 @@ export async function getStaticPaths(){
 const CoffeeStore =(initialProps)=>{
    const router = useRouter();
 
-   if (router.isFallback){
-    return <div>Loading....</div>
-   }
    const {id} = router.query;
-   const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore)
+   const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore || {})
    
    const {
     state:{
@@ -95,9 +92,14 @@ const CoffeeStore =(initialProps)=>{
     }else{
         handleCreateCoffeeStore(initialProps.coffeeStore)
     }
-   },[id,initialProps.coffeeStore])
+   },[id, initialProps, initialProps.coffeeStore, coffeeStores])
 
-   const {address,neighborhood,name,imgUrl}= coffeeStore
+   const {
+    address ='',
+    neighborhood='',
+    name='',
+    imgUrl=''
+        }= coffeeStore
 
    const [votingCount, setVotingCount] = useState(0)
 
@@ -110,6 +112,11 @@ const CoffeeStore =(initialProps)=>{
         setVotingCount(data[0].voting)
     }
    }, [data])
+
+
+   if (router.isFallback){
+    return <div>Loading....</div>
+   }
 
    const handleUpVoteButton= async()=>{
 

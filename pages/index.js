@@ -59,7 +59,7 @@ if(latLong){
 
 }
 setCoffeeStoresByLocation();
-  },[latLong])
+  },[latLong, dispatch])
 
 
   const handleOnBannerBtnClick=()=>{
