@@ -69,7 +69,7 @@ setCoffeeStoresByLocation();
     <div className={styles.container}>
       <Head>
         <title>Browse Coffee Shops</title>
-        <meta name="description" content="Browsae the coffee shops near you" />
+        <meta name="description" content="Browse the coffee shops near you" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -83,7 +83,7 @@ setCoffeeStoresByLocation();
          </p> }
 
           <div className={styles.heroImage}>
-     <Image src="/static/hero-image.png" width={700} height={400}/>
+     <Image src="/static/hero-image.png" alt="Hero Image" width={700} height={400}/>
      </div>
 
      {coffeeStores.length>0 &&( <div className={styles.sectionWrapper}>

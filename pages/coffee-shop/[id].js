@@ -148,6 +148,8 @@ const CoffeeStore =(initialProps)=>{
      <Head>
 
 <title>{name}</title>
+
+<meta name="description" content= {`${name} coffee Store`} />
 </Head>
 
 <div className={styles.container}>
@@ -166,20 +168,20 @@ const CoffeeStore =(initialProps)=>{
 
 { address && 
 <div className={styles.iconWrapper}>
-<Image src='/static/icon/places.svg' width={24} height={24}/>
+<Image src='/static/icon/places.svg' alt='Places icon' width={24} height={24}/>
     <p className={styles.text
     }>{address}</p>
 </div>
 }
 {neighborhood &&
 <div className={styles.iconWrapper}>
-<Image src='/static/icon/nearMe.svg' width={24} height={24}/>
+<Image src='/static/icon/nearMe.svg'  alt='Neighbourhood icon' width={24} height={24}/>
     <p className={styles.text
     }>{neighborhood}</p>
 </div>
 }
 <div className={styles.iconWrapper}>
-<Image src='/static/icon/star.svg' width={24} height={24}/>
+<Image src='/static/icon/star.svg'  alt='Star icon' width={24} height={24}/>
     <p className={styles.text
     }>{votingCount}</p>
 </div>
